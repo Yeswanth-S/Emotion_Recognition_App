@@ -1,8 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>FER</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection App - Features</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Main Container -->
+    <div class="main-container">
+        <h1>Explore Our Features</h1>
+        
+        <!-- Cards Container -->
+        <div class="cards-container">
+            <!-- Upload Image Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="fas fa-image fa-3x"></i>
+                    <h3>Upload Image</h3>
+                    <p>Detect emotions from uploaded images in seconds.</p>
+                </div>
+                <div class="card-hover">
+                    <h4>Upload Image</h4>
+                    <p>Upload an image to get real-time emotion detection results. Perfect for analyzing photos.</p>
+                    <a href="/upload_image" class="cta-btn">Get Started</a>
+                </div>
+            </div>
+
+            <!-- Upload Video Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="fas fa-video fa-3x"></i>
+                    <h3>Upload Video</h3>
+                    <p>Analyze emotions from video clips with ease.</p>
+                </div>
+                <div class="card-hover">
+                    <h4>Upload Video</h4>
+                    <p>Upload a video and analyze emotions from the frames extracted. Ideal for content review.</p>
+                    <a href="/upload_video" class="cta-btn">Get Started</a>
+                </div>
+            </div>
+
+            <!-- Use Webcam Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="fas fa-camera fa-3x"></i>
+                    <h3>Use Webcam</h3>
+                    <p>Capture frames in real-time from your webcam to detect emotions instantly.</p>
+                </div>
+                <div class="card-hover">
+                    <h4>Use Webcam</h4>
+                    <p>Capture frames in real-time from your webcam to detect emotions instantly.</p>
+                    <a href="/use_webcam" class="cta-btn">Get Started</a>
+                </div>
+            </div>
+
+            <!-- Livefeed Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="fas fa-broadcast-tower fa-3x"></i>
+                    <h3>Livefeed</h3>
+                    <p>Stream live from your webcam and receive real-time emotion updates as you interact.</p>
+                </div>
+                <div class="card-hover">
+                    <h4>Livefeed</h4>
+                    <p>Stream live from your webcam and receive real-time emotion updates as you interact.</p>
+                    <a href="/livefeed" class="cta-btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

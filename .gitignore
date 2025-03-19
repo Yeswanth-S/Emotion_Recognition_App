@@ -2,6 +2,8 @@ __pycache__/
 .env/
 venv/
 *.log
-models/
+models/*
+!models/haarcascade_frontalface_default.xml
 *.h5
 data/
+*.csv
