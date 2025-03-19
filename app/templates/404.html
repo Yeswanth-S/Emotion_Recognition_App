@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .not-found-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e2a3a, #2c3e50);
+      color: #fff;
+      text-align: center;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .not-found-page h1 {
+      font-size: 80px;
+      font-weight: bold;
+      animation: fadeIn 1.5s ease-out;
+    }
+    
+    .not-found-page p {
+      font-size: 20px;
+      margin-top: 20px;
+      animation: fadeIn 2s ease-out;
+    }
+    
+    .not-found-page i {
+      font-size: 100px;
+      margin-top: 30px;
+      animation: bounceCube 3s infinite linear;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes bounceCube {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="not-found-page">
+    <h1>404</h1>
+    <p>Oops! The page you're looking for doesn't exist.</p>
+    <i class="fas fa-cubes"></i>
+  </div>
+</body>
+</html>

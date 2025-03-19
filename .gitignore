@@ -5,3 +5,4 @@ venv/
 models/
 *.h5
 data/
+*.csv

@@ -1,1 +1,6 @@
 # List Python dependencies here 
+Flask==3.0.3
+opencv-python==4.10.0.84
+numpy==1.26.4
+tensorflow==2.10.0
+Werkzeug==3.0.4

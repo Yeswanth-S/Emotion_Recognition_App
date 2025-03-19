@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Webcam - Emotion Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        async function startWebcam() {
+            const video = document.getElementById('video');
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            document.getElementById('videoContainer').style.display = 'block'; // Show video container
+        }
+
+        function captureFrame() {
+            const video = document.getElementById('video');
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0);
+
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                blob && formData.append('file', blob, 'frame.png'); // Add the frame as a file
+
+                uploadFrame(formData);
+            }, 'image/png');
+        }
+
+        function uploadFrame(formData) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').innerHTML = '';
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+
+                    if (data.length === 0) {
+                        document.getElementById('result').innerHTML = '<p>No faces detected in the image.</p>';
+                    } else {
+                        let resultText = "<h3>Detected Emotion (Left to Right):</h3>";
+                        data.forEach((emotion, index) => {
+                            resultText += `<p>Person ${index + 1}: Emotion: <strong>${emotion.emotion}</strong>, Confidence: ${emotion.confidence.toFixed(1)}%</p>`;
+                        });
+                        resultText += "<p>Note: Persons are ordered from left to right.</p>";
+                        document.getElementById('result').innerHTML = resultText;
+                    }
+                })
+
+
+                .catch(error => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('result').innerHTML = '<p>An error occurred while processing the image.</p>';
+                    console.error('Error:', error);
+                });
+        }
+
+        window.onload = startWebcam; // Start webcam when the page loads
+    </script>
+</head>
+
+<body>
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <h1>Use Webcam for Emotion Detection</h1>
+        <div id="videoContainer" style="display: none;">
+            <video id="video" autoplay></video>
+            <button class="capture-btn" onclick="captureFrame()">Capture Frame</button>
+        </div>
+        <div class="loading" id="loading" style="display: none;">Processing image, please wait...</div>
+        <div class="result" id="result">
+            <h3>Detected Emotions:</h3>
+            <p>No image uploaded yet.</p>
+        </div>
+    </div>
+</body>
+
+</html>
