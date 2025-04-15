@@ -1,37 +1,141 @@
+
 # Emotion Detection App
 
-## Overview
-This is an emotion detection app built using Flask, OpenCV, and TensorFlow. It allows users to upload images, videos, or use a live feed to detect emotions. The app uses a pre-trained deep learning model to classify emotions in faces.
+## 🚀 Overview
+The Emotion Detection App is a web-based application that uses deep learning to recognize human emotions from facial expressions. Built with **Flask**, **OpenCV**, and **TensorFlow**, the app supports multiple input methods including image upload, video upload, and real-time webcam feed.
 
-## Features
-- Upload an image to detect emotions.
-- Upload a video to analyze emotions frame by frame.
-- Use your webcam to detect emotions in real-time.
-- View live feed for continuous emotion detection.
+It leverages a pre-trained convolutional neural network model to classify facial emotions in various input formats.
 
-## Project Structure
-- `app.py`: Main Flask application file.
-- `uploads/`: Temporary storage for uploaded files.
-- `static/`: Folder containing static files (CSS, JS).
-- `templates/`: HTML templates for rendering pages.
-- `model.json`: Pre-trained model architecture (not included).
-- `model.h5`: Pre-trained model weights (not included).
+## 🎯 Features
+- 📷 **Image Upload**: Detect emotions in static images.
+- 🎞️ **Video Upload**: Analyze emotions frame by frame in a video.
+- 🎥 **Webcam Mode**: Real-time emotion detection using your webcam.
+- 🔴 **Live Feed**: Continuous facial emotion recognition through a live video stream.
 
-## How to Run
-1. Clone this repository.
-2. Install the dependencies: `pip install -r requirements.txt`.
-3. Place the `model.json` and `model.h5` files in the project directory.
-4. Run the Flask app: `python app.py`.
-5. Open your browser and go to `http://127.0.0.1:5000`.
+<details>
+<summary>📁 Project Structure</summary>
 
-## Dependencies
+```
+Emotion-Detection-App/
+│
+├── app.py                     # Main Flask application
+├── Dockerfile                 # Docker configuration file
+├── Main.py                    # Model training script
+├── README.md                  # Project documentation
+├── requirements.txt           # Python dependencies
+│
+├── app/                       # Flask app directory
+│   ├── static/                # Static files (CSS, JS)
+│   │   └── css/
+│   │       ├── index.css      # Styles for the homepage
+│   │       └── styles.css     # General styles
+│   │
+│   └── templates/             # HTML templates for the app
+│       ├── 404.html           # Custom 404 page
+│       ├── index.html         # Homepage template
+│       ├── livefeed.html      # Live feed page
+│       ├── sidebar.html       # Sidebar template
+│       ├── upload_image.html  # Image upload page
+│       ├── upload_video.html  # Video upload page
+│       └── use_webcam.html    # Webcam usage page
+│
+├── data/                      # Data directory (not included)
+│   └── fer2013.csv            # FER-2013 emotion dataset
+│
+├── models/                    # Machine learning models and configuration (not included)
+│   ├── haarcascade_frontalface_default.xml  # Haar cascade for face detection
+│   ├── model.h5               # Pre-trained model weights
+│   └── model.json             # Model architecture
+│
+└── uploads/                   # Temporary file storage for uploaded files
+```
+
+</details>
+
+<details>
+<summary>🛠️ Getting Started</summary>
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/Emotion-Detection-App.git
+cd Emotion-Detection-App
+```
+
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Add the Model Files
+Place the following files in the root project directory:
+- `model.json`
+- `model.h5`
+
+> ⚠️ These files are **not included** in the repository. You must add them manually via running the `Main.py`.
+
+### 4. Run the Application
+```bash
+python app.py
+```
+
+### 5. Open in Browser
+Visit: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+</details>
+
+<details>
+<summary>🧪 How to Use</summary>
+
+| Feature       | URL Path           | Description                              |
+|---------------|--------------------|------------------------------------------|
+| Upload Image  | `/upload_image`    | Upload an image to detect emotions       |
+| Upload Video  | `/upload_video`    | Analyze a video frame-by-frame           |
+| Use Webcam    | `/use_webcam`      | Real-time emotion detection via webcam   |
+| Live Feed     | `/livefeed`        | Continuous emotion recognition stream    |
+
+</details>
+
+<details>
+<summary>📦 Dependencies</summary>
+
 - Flask
 - OpenCV
 - TensorFlow
 - NumPy
 
-## Usage
-- **Upload Image**: Navigate to `/upload_image` and upload an image for emotion detection.
-- **Upload Video**: Navigate to `/upload_video` and upload a video for frame-by-frame emotion analysis.
-- **Use Webcam**: Navigate to `/use_webcam` to use your webcam for real-time emotion detection.
-- **Live Feed**: Navigate to `/livefeed` for live emotion detection on a continuous video stream.
+</details>
+
+<details>
+<summary>🐳 Docker (Optional)</summary>
+
+### Build and Run the App using Docker
+
+```bash
+docker build -t emotion-detector .
+docker run -p 5000:5000 emotion-detector
+```
+
+> Make sure `model.h5` and `model.json` are in the root directory before building the image.
+
+</details>
+
+<details>
+<summary>🤖 Model</summary>
+
+The model is trained to detect the following emotions:
+- Angry
+- Disgust
+- Fear
+- Happy
+- Neutral
+- Sad
+- Surprise
+
+Note: Model training can be initiated by running the Main.py file.
+</details>
+
+---
+
+## 📜 License
+This project is licensed under the [MIT License](LICENSE).  
+Contributions are welcome! If you have suggestions or improvements, feel free to open an issue or a pull request.
