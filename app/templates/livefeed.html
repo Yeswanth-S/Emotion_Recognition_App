@@ -7,63 +7,7 @@
     <title>Livefeed - Emotion Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>
-        let videoStream;
-
-        function startLiveFeed() {
-            const video = document.getElementById('video');
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(stream => {
-                    videoStream = stream;
-                    video.srcObject = stream;
-                    video.play();
-                    processVideo();
-                })
-                .catch(err => {
-                    console.error("Error accessing the webcam: ", err);
-                });
-        }
-
-        function processVideo() {
-            const video = document.getElementById('video');
-            const canvas = document.getElementById('canvas');
-            const context = canvas.getContext('2d');
-
-            setInterval(() => {
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const frameData = canvas.toDataURL('image/jpeg');
-
-                // Send the frame to the server for emotion detection
-                fetch('/detect_frame', {
-                    method: 'POST',
-                    body: JSON.stringify({ image: frameData }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('result').innerHTML = ''; // Clear previous results
-                        if (data.length === 0) {
-                            document.getElementById('result').innerHTML = '<p>No faces detected.</p>';
-                        } else {
-                            let resultText = "<h3>Detected Emotions (Left to Right):</h3>";
-                            data.forEach((emotion, index) => {
-                                resultText += `<p>Person ${index + 1}: Emotion: <strong>${emotion.emotion}</strong>, Confidence: ${emotion.confidence.toFixed(1)}%</p>`;
-                            });
-                            resultText += "<p>Note: Persons are ordered from left to right.</p>";
-                            document.getElementById('result').innerHTML = resultText;
-                        }
-                    })
-
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            }, 1000); // Adjust frequency as necessary
-        }
-
-        window.onload = startLiveFeed;
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 
 <body>

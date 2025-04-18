@@ -6,57 +6,7 @@
     <title>Upload Image - Emotion Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>
-        function showFileName() {
-            const fileInput = document.getElementById('imageUpload');
-            const file = fileInput.files[0];
-            const fileNameDisplay = document.getElementById('fileName');
-
-            if (file) {
-                const fileName = file.name;
-                const truncatedFileName = fileName.length > 20 
-                    ? fileName.substring(0, 17) + '...' 
-                    : fileName;
-                fileNameDisplay.innerHTML = `Selected file: ${truncatedFileName}`;
-                uploadImage(); // Automatically upload after selection
-            } else {
-                fileNameDisplay.innerHTML = 'No file selected';
-            }
-        }
-
-        function uploadImage() {
-            const fileInput = document.getElementById('imageUpload');
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('result').innerHTML = '';
-
-            fetch('/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('loading').style.display = 'none';
-
-                if (data.length === 0) {
-                    document.getElementById('result').innerHTML = '<p>No faces detected in the image.</p>';
-                } else {
-                    let resultText = "<h3>Detected Emotion:</h3>";
-                    data.forEach(emotion => {
-                        resultText += `<p>Emotion: <strong>${emotion.emotion}</strong>, Confidence: ${emotion.confidence.toFixed(1)}%</p>`;
-                    });
-                    document.getElementById('result').innerHTML = resultText;
-                }
-            })
-            .catch(error => {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('result').innerHTML = '<p>An error occurred while processing the image.</p>';
-                console.error('Error:', error);
-            });
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 <body>
     {% include 'sidebar.html' %}
@@ -66,7 +16,7 @@
             <i class="fas fa-upload upload-icon"></i> 
             <p>Click to upload an image</p>
         </div>
-        <input type="file" id="imageUpload" accept="image/*" onchange="showFileName()">
+        <input type="file" id="imageUpload" accept="image/*">
         <div class="file-info" id="fileName">No file selected</div>
         <div class="loading" id="loading" style="display: none;">Processing image, please wait...</div>
         <div class="result" id="result">

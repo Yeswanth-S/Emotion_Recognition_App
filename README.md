@@ -57,8 +57,8 @@ Emotion-Detection-App/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/Emotion-Detection-App.git
-cd Emotion-Detection-App
+git clone https://github.com/YESWANTH-S/Emotion_Recognition_App.git 
+cd Emotion_Recognition_App
 ```
 
 ### 2. Install Dependencies

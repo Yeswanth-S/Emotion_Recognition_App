@@ -6,69 +6,7 @@
     <title>Upload Video - Emotion Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>
-        function showFileName() {
-            const fileInput = document.getElementById('videoUpload');
-            const file = fileInput.files[0];
-            const fileNameDisplay = document.getElementById('fileName');
-
-            if (file) {
-                const fileName = file.name;
-                const truncatedFileName = fileName.length > 20 
-                    ? fileName.substring(0, 17) + '...' 
-                    : fileName;
-                fileNameDisplay.innerHTML = `Selected file: ${truncatedFileName}`;
-                uploadVideo(); // Automatically upload after selection
-            } else {
-                fileNameDisplay.innerHTML = 'No file selected';
-            }
-        }
-
-        function uploadVideo() {
-            const fileInput = document.getElementById('videoUpload');
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('result').innerHTML = '';
-
-            fetch('/upload_video', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('loading').style.display = 'none';
-
-                if (data.details.length === 0) {
-                    document.getElementById('result').innerHTML = '<p>No faces detected in the video.</p>';
-                } else {
-                    // Show summary of emotions
-                    let summaryText = "<h3>Summary of Detected Emotions:</h3>";
-                    data.summary.forEach(emotion => {
-                        summaryText += `<p>${emotion.emotion}: <strong>${emotion.count}</strong></p>`;
-                    });
-
-                    // Show detailed results for each frame
-                    let detailText = "<h3>Detailed Frame Results:</h3>";
-                    data.details.forEach((frame, index) => {
-                        detailText += `<p><strong>Frame ${index + 1}:</strong></p>`;
-                        frame.forEach(emotion => {
-                            detailText += `<p>Emotion: <strong>${emotion.emotion}</strong>, Confidence: ${emotion.confidence.toFixed(1)}%</p>`;
-                        });
-                    });
-
-                    // Combine summary and details
-                    document.getElementById('result').innerHTML = summaryText + detailText;
-                }
-            })
-            .catch(error => {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('result').innerHTML = '<p>An error occurred while processing the video.</p>';
-                console.error('Error:', error);
-            });
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 <body>
     {% include 'sidebar.html' %}
@@ -78,7 +16,7 @@
             <i class="fas fa-upload upload-icon"></i>
             <p>Click to upload a video</p>
         </div>
-        <input type="file" id="videoUpload" accept="video/*" onchange="showFileName()" style="display:none;">
+        <input type="file" id="videoUpload" accept="video/*" style="display:none;">
         <div class="file-info" id="fileName">No file selected</div>
         <div class="loading" id="loading" style="display: none;">Processing video, please wait...</div>
         <div class="result" id="result">
