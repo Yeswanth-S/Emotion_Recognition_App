@@ -1,132 +1,16 @@
+/* 1. Global Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.container {
-    margin-left: 200px;
-    padding: 20px;
-    width: 100%;
-    transition: margin-left 0.3s ease;
-}
-
-.intro {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.intro h1 {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.intro p {
-    color: #666;
-    font-size: 16px;
-}
-
-.features {
-    margin-top: 40px;
-    text-align: center;
-}
-
-.features h2 {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.feature-cards {
-    display: flex;
     justify-content: center;
-    gap: 30px;
+    align-items: center;
+    height: 100vh;
 }
 
-.feature-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.feature-card i {
-    color: #4CAF50;
-    margin-bottom: 15px;
-}
-
-.feature-card h3 {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.feature-card p {
-    color: #666;
-    font-size: 14px;
-}
-
-.cta-btn {
-    display: inline-block;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.cta-btn:hover {
-    background-color: #45a049;
-}
-
-.cta-section {
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 40px;
-    border-radius: 10px;
-    margin-top: 50px;
-}
-
-.cta-section h2 {
-    margin-bottom: 20px;
-}
-
-.cta-section p {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.cta-section a {
-    margin: 5px;
-}
-
-@media (max-width: 768px) {
-    .feature-cards {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .container {
-        margin-left: 0;
-    }
-}
-
+/* 2. Sidebar Styles */
 .sidebar {
     width: 200px;
     background-color: #000000;
@@ -176,6 +60,7 @@ body {
     display: none;
 }
 
+/* 3. Toggle Button */
 .toggle-btn {
     background-color: transparent;
     color: white;
@@ -192,40 +77,31 @@ body {
     font-size: 20px;
 }
 
+/* 4. Container Styles */
 .container {
     margin-left: 200px;
     padding: 20px;
+    width: 350px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
     transition: margin-left 0.3s ease;
 }
 
+/* 5. Layout Adjustments for Sidebar Collapse */
 .sidebar.collapsed + .container {
     margin-left: 60px;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+/* 6. Content Elements */
 
-.container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    text-align: center;
-}
-
+/* Heading */
 h1 {
     color: #333;
 }
 
+/* Upload Area */
 .upload-area {
     border: 2px dashed black;
     border-radius: 10px;
@@ -253,20 +129,7 @@ input[type="file"] {
     margin-top: 10px;
 }
 
-#videoContainer {
-    display: none;
-    margin-top: 20px;
-}
-
-video {
-    width: 100%;
-    max-width: 320px;
-    height: auto;
-    border: 2px solid #000000;
-    border-radius: 10px;
-    transform: scaleX(-1); 
-}
-
+/* Capture Button */
 .capture-btn {
     margin-top: 10px;
     padding: 10px 20px;
@@ -281,6 +144,7 @@ video {
     background-color: #000000;
 }
 
+/* Result Section */
 .result {
     margin-top: 20px;
     padding: 15px;
@@ -291,20 +155,27 @@ video {
     text-align: left;
 }
 
+.result h3 {
+    margin: 0;
+    color: #333;
+}
+
+/* 7. Video Styles */
 video {
     width: 100%;
-    max-width: 800px;
+    max-width: 320px;
     height: auto;
     border: 2px solid #000000;
     border-radius: 10px;
     transform: scaleX(-1); 
 }
 
-.result h3 {
-    margin: 0;
-    color: #333;
+#videoContainer {
+    display: none;
+    margin-top: 20px;
 }
 
+/* 8. Loading */
 .loading {
     font-size: 18px;
     color: #888;
