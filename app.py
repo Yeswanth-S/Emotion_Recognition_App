@@ -35,6 +35,10 @@ model.load_weights(model_weights_path)
 # Load face detection model
 face_cascade = cv2.CascadeClassifier(face_cascade_path)
 
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'avi', 'mov', 'mkv'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 # Emotion labels
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
 
@@ -134,16 +138,23 @@ def upload_image():
     
     file = request.files['file']
     filename = secure_filename(file.filename)
-    
+
+    if not allowed_file(filename):
+        return jsonify({'error': 'Unsupported file type'}), 400
+
     temp_file_path = os.path.join('uploads', filename)
     file.save(temp_file_path)
 
     # Detect emotions
-    emotions = detect_emotion_from_image(cv2.imread(temp_file_path))
+    image = cv2.imread(temp_file_path)
+    if image is None:
+        os.remove(temp_file_path)
+        return jsonify({'error': 'Invalid image file'}), 400
 
+    emotions = detect_emotion_from_image(image)
     os.remove(temp_file_path)
 
-    return jsonify(emotions)
+    return jsonify(emotions)  # will return [] if no face detected (frontend handles it)
 
 @app.route('/upload_video', methods=['POST'])
 def upload_video():
@@ -153,20 +164,19 @@ def upload_video():
     file = request.files['file']
     filename = secure_filename(file.filename)
 
+    if not allowed_file(filename):
+        return jsonify({'error': 'Unsupported file type'}), 400
+
     temp_file_path = os.path.join('uploads', filename)
     file.save(temp_file_path)
 
     frame_emotions = detect_emotion_from_video(temp_file_path)
     os.remove(temp_file_path)
 
-    # Create a summary of emotions detected
     summary = {}
     for frame in frame_emotions:
         for emotion in frame:
-            if emotion['emotion'] in summary:
-                summary[emotion['emotion']] += 1
-            else:
-                summary[emotion['emotion']] = 1
+            summary[emotion['emotion']] = summary.get(emotion['emotion'], 0) + 1
 
     summary_output = [{'emotion': key, 'count': value} for key, value in summary.items()]
 
@@ -178,16 +188,24 @@ def upload_video():
 @app.route('/detect_frame', methods=['POST'])
 def detect_frame():
     data = request.get_json()
-    img_data = data.get('image')
+    if not data or 'image' not in data:
+        return jsonify({'error': 'No image data received'}), 400
 
-    img_data = img_data.split(',')[1]
-    img_data = base64.b64decode(img_data)
-    np_img = np.frombuffer(img_data, np.uint8)
-    img = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
+    try:
+        img_data = data['image'].split(',')[1]
+        img_bytes = base64.b64decode(img_data)
+        np_img = np.frombuffer(img_bytes, np.uint8)
+        img = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
 
-    emotions = detect_emotion_from_image(img)
+        if img is None:
+            return jsonify({'error': 'Invalid image data'}), 400
 
-    return jsonify(emotions)
+        emotions = detect_emotion_from_image(img)
+        return jsonify(emotions)  # returns [] if no faces detected
+
+    except Exception as e:
+        return jsonify({'error': 'Failed to process image', 'details': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
