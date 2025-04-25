@@ -1,7 +1,38 @@
-/* 1. Global Styles */
-body {
+/* Root color variables */
+:root {
+    /* Mocha Palette (Dark Theme) */
+    --mocha-base: #11111b;
+    --mocha-text: #cdd6f4;
+    --mocha-lavender: #b4befe;
+    --mocha-blue: #89b4fa;
+
+  
+    /* Latte Palette (Light Theme) */
+    --latte-base: #ffffff;
+    --latte-text: #4c4f69;
+    --latte-lavender: #7287fd;
+    --latte-blue: #1e66f5;
+  }
+  
+  /* Theme Switching */
+  body.light-mode {
+    --base: var(--latte-base);
+    --text: var(--latte-text);
+    --lavender: var(--latte-lavender);
+    --blue: var(--latte-blue);
+  }
+  
+  body:not(.light-mode) {
+    --base: var(--mocha-base);
+    --text: var(--mocha-text);
+    --lavender: var(--mocha-lavender);
+    --blue: var(--mocha-blue);
+  }
+  
+  /* 1. Global Styles */
+  body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--base);
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,10 +41,120 @@ body {
     height: 100vh;
 }
 
+/* Main container for index page */
+.main-container {
+    text-align: center;
+    padding: 30px;
+    padding-top: 20px;
+}
+
+.main-container h1 {
+    color: var(--text);
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+/* Cards container */
+.cards-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+}
+
+/* Individual card styling */
+.card {
+    background-color: var(--base);
+    width: 250px;
+    height: 350px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.card-content i {
+    color: var(--lavender);
+    margin-bottom: 15px;
+}
+
+.card-content h3 {
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+.card-content p {
+    color: var(--text);
+    font-size: 14px;
+}
+
+.card-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--base);
+    color: var(--text); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.card:hover .card-hover {
+    opacity: 1;
+}
+
+.card-hover h4 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.card-hover p {
+    margin-bottom: 20px;
+}
+
+
+.cta-btn {
+    background-color: var(--lavender);
+    color: var(--base);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: var(--blue);
+}
+
 /* 2. Sidebar Styles */
 .sidebar {
     width: 200px;
-    background-color: #000000;
+    background-color: var(--base);
     position: fixed;
     height: 100vh;
     top: 0;
@@ -23,6 +164,7 @@ body {
     padding: 10px;
     transition: width 0.3s ease;
     overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
 .sidebar.collapsed {
@@ -30,7 +172,7 @@ body {
 }
 
 .sidebar a {
-    color: white;
+    color: var(--text);
     text-decoration: none;
     padding: 15px;
     display: flex;
@@ -40,7 +182,8 @@ body {
 }
 
 .sidebar a:hover {
-    background-color: #545454;
+    background-color: var(--lavender);
+    color: var(--base);
 }
 
 .sidebar i {
@@ -63,7 +206,7 @@ body {
 /* 3. Toggle Button */
 .toggle-btn {
     background-color: transparent;
-    color: white;
+    color: var(--text);
     border: none;
     cursor: pointer;
     margin-bottom: 20px;
@@ -82,9 +225,9 @@ body {
     margin-left: 200px;
     padding: 20px;
     width: 350px;
-    background-color: #fff;
+    background-color: var(--base);
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
     text-align: center;
     transition: margin-left 0.3s ease;
 }
@@ -98,20 +241,24 @@ body {
 
 /* Heading */
 h1 {
-    color: #333;
+    color: var(--text);
 }
 
 /* Upload Area */
 .upload-area {
-    border: 2px dashed black;
+    border: 2px dashed var(--lavender);
     border-radius: 10px;
     padding: 40px;
     text-align: center;
     cursor: pointer;
 }
 
+.upload-area p {
+    color:var(--text);
+}
+
 .upload-area:hover {
-    border-color: #333;
+    border-color: var(--blue);
 }
 
 input[type="file"] {
@@ -120,12 +267,12 @@ input[type="file"] {
 
 .upload-icon {
     font-size: 50px;
-    color: black;
+    color: var(--lavender);
 }
 
 .file-info {
     font-size: 14px;
-    color: #888;
+    color: var(--text);
     margin-top: 10px;
 }
 
@@ -133,23 +280,23 @@ input[type="file"] {
 .capture-btn {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #000000;
-    color: white;
+    background-color: var(--lavender);
+    color: var(--base);
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .capture-btn:hover {
-    background-color: #000000;
+    background-color: var(--blue);
 }
 
 /* Result Section */
 .result {
     margin-top: 20px;
     padding: 15px;
-    color: #555;
-    background-color: #fff;
+    color: var(--text);
+    background-color: var(--base);
     max-height: 300px;
     overflow-y: auto;
     text-align: left;
@@ -157,7 +304,13 @@ input[type="file"] {
 
 .result h3 {
     margin: 0;
-    color: #333;
+    color: var(--text);
+}
+
+.result p {
+    margin: 5px 0;
+    font-size: 15px;
+    color: var(--text);
 }
 
 /* 7. Video Styles */
@@ -165,7 +318,7 @@ video {
     width: 100%;
     max-width: 320px;
     height: auto;
-    border: 2px solid #000000;
+    border: 2px solid var(--text);
     border-radius: 10px;
     transform: scaleX(-1); 
 }
@@ -178,5 +331,60 @@ video {
 /* 8. Loading */
 .loading {
     font-size: 18px;
-    color: #888;
+    color: var(--text);
 }
+
+/* Styling for the theme toggle switch */
+.theme-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--text);
+    transition: 0.4s;
+    border-radius: 28px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px; 
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--base);
+    transition: 0.4s;
+  }
+  
+  /* When checked, move the slider */
+  input:checked + .slider {
+    background-color: var(--lavender);
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(22px);
+  }

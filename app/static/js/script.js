@@ -248,3 +248,24 @@ function uploadSnapshot(formData) {
             console.error('Error:', err);
         });
 }
+
+// Theme Toggle
+const themeToggle = document.getElementById('theme-toggle');
+
+if (localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light-mode');
+  themeToggle.checked = true;
+} else {
+  document.body.classList.remove('light-mode');
+  themeToggle.checked = false;
+}
+
+themeToggle.addEventListener('change', () => {
+  if (themeToggle.checked) {
+    document.body.classList.add('light-mode');
+    localStorage.setItem('theme', 'light');
+  } else {
+    document.body.classList.remove('light-mode');
+    localStorage.setItem('theme', 'dark');
+  }
+});
