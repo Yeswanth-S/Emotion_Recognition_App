@@ -4,14 +4,18 @@ FROM python:3.9-slim
 # Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies for OpenCV and TensorFlow
+# Install system dependencies for OpenCV, TensorFlow, and any necessary libraries
 RUN apt-get update && apt-get install -y \
     libatlas-base-dev \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
     libxrender-dev \
+    libgl1-mesa-glx \
     && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip to the latest version
+RUN pip install --upgrade pip
 
 # Copy the current directory contents into the container at /app
 COPY . /app
