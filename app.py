@@ -22,7 +22,7 @@ models_folder = os.path.join(script_dir, 'models')
 # Initialize Flask app with the custom template and static folder paths
 app = Flask(__name__, template_folder=templates_folder, static_folder=static_folder)
 
-# Build the relative path to model.json, model.h5, and haarcascade_frontalface_default.xml
+# Build the relative path to the model files
 model_json_path = os.path.join(models_folder, 'model.json')
 model_weights_path = os.path.join(models_folder, 'model.h5')
 face_cascade_path = os.path.join(models_folder, 'haarcascade_frontalface_default.xml')
@@ -126,7 +126,6 @@ def use_webcam_page():
 def livefeed_page():
     return render_template('livefeed.html')
 
-# Add custom 404 handler
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -154,7 +153,7 @@ def upload_image():
     emotions = detect_emotion_from_image(image)
     os.remove(temp_file_path)
 
-    return jsonify(emotions)  # will return [] if no face detected (frontend handles it)
+    return jsonify(emotions) 
 
 @app.route('/upload_video', methods=['POST'])
 def upload_video():
@@ -208,4 +207,4 @@ def detect_frame():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)

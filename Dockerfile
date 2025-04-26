@@ -2,14 +2,17 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Install system dependencies for OpenCV and TensorFlow
+# Install system dependencies for OpenCV, TensorFlow, and any necessary libraries
 RUN apt-get update && apt-get install -y \
     libatlas-base-dev \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
     libxrender-dev \
+    libgl1-mesa-glx \
     && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade pip
 
 COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
