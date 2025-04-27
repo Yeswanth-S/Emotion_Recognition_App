@@ -26,9 +26,11 @@ Emotion-Detection-App/
 │
 ├── app/                       # Flask app directory
 │   ├── static/                # Static files (CSS, JS)
-│   │   └── css/
-│   │       ├── index.css      # Styles for the homepage
+│   │   └── css/ 
 │   │       └── styles.css     # General styles
+│   │
+│   └── js/ 
+│       └── script.js          # JavaScript for interactivity
 │   │
 │   └── templates/             # HTML templates for the app
 │       ├── 404.html           # Custom 404 page
@@ -48,6 +50,7 @@ Emotion-Detection-App/
 │   └── model.json             # Model architecture
 │
 └── uploads/                   # Temporary file storage for uploaded files
+
 ```
 
 </details>
