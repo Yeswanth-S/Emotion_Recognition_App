@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Video - Emotion Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
-<body>
+<body class="has-sidebar">
     {% include 'sidebar.html' %}
     <div class="theme-switcher"> <label class="switch"> <input type="checkbox" id="theme-toggle"> <span class="slider"> </span> </label> </div>
     <div class="container">
+        <span class="eyebrow">Video</span>
         <h1>Upload Video for Emotion Detection</h1>
-        <div class="upload-area" onclick="document.getElementById('videoUpload').click()">
-            <i class="fas fa-upload upload-icon"></i>
+        <div class="upload-area" onclick="document.getElementById('videoUpload').click()" tabindex="0">
+            <i class="fas fa-arrow-up-from-bracket upload-icon"></i>
             <p>Click to upload a video</p>
         </div>
         <input type="file" id="videoUpload" accept="video/*" style="display:none;">
         <div class="file-info" id="fileName">No file selected</div>
         <div class="loading" id="loading" style="display: none;">Processing video, please wait...</div>
         <div class="result" id="result">
-            <h3>Detected Emotions:</h3>
+            <h3>Detected Emotions</h3>
             <p>No video uploaded yet.</p>
         </div>
     </div>

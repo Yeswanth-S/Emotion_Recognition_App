@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 23 28 28" width="28" height="28" role="img">
+  <title>FER</title>
+  <circle cx="32" cy="37" r="12" fill="none" stroke="#9d7bff" stroke-width="4" />
+  <path d="M25 38 Q32 46 39 38" fill="none" stroke="#9d7bff" stroke-width="3" stroke-linecap="round" />
+  <path d="M25 32 Q27 29 29 32 M35 32 Q37 29 39 32" fill="none" stroke="#9d7bff" stroke-width="3" stroke-linecap="round" />
+</svg>

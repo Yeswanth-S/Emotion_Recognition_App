@@ -1,48 +1,35 @@
 import os
-from flask import Flask, request, jsonify, render_template
+import base64
 import cv2
 import numpy as np
+from flask import Flask, request, jsonify, render_template
 from tensorflow.keras.models import model_from_json
 from tensorflow.keras.preprocessing.image import img_to_array
 from werkzeug.utils import secure_filename
-import base64
 
-# Get the directory where the script is located.
 script_dir = os.path.dirname(os.path.realpath(__file__))
-
-# Set the path to the templates folder
 templates_folder = os.path.join(script_dir, 'app', 'templates')
-
-# Set the path to the static folder 
 static_folder = os.path.join(script_dir, 'app', 'static')
-
-# Set the path to the models folder
 models_folder = os.path.join(script_dir, 'models')
 
-# Initialize Flask app with the custom template and static folder paths
 app = Flask(__name__, template_folder=templates_folder, static_folder=static_folder)
 
-# Build the relative path to the model files
 model_json_path = os.path.join(models_folder, 'model.json')
 model_weights_path = os.path.join(models_folder, 'model.h5')
 face_cascade_path = os.path.join(models_folder, 'haarcascade_frontalface_default.xml')
 
-# Load the model and weights
 with open(model_json_path, 'r') as json_file:
     model = model_from_json(json_file.read())
 model.load_weights(model_weights_path)
 
-# Load face detection model
 face_cascade = cv2.CascadeClassifier(face_cascade_path)
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'avi', 'mov', 'mkv'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# Emotion labels
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
 
-# Function to detect and classify emotion from image
 def detect_emotion_from_image(img):
     gray_frame = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray_frame, scaleFactor=1.3, minNeighbors=5)
@@ -65,13 +52,11 @@ def detect_emotion_from_image(img):
     # Sort detected faces by x-coordinate for left-to-right detection
     emotions_sorted = sorted(emotions, key=lambda item: item['x'])
 
-    # Remove 'x' key from sorted emotions
     for emotion in emotions_sorted:
         del emotion['x']
 
     return emotions_sorted
 
-# Function to process video and detect emotions
 def detect_emotion_from_video(video_path):
     cap = cv2.VideoCapture(video_path)
     frame_emotions = []
@@ -84,7 +69,7 @@ def detect_emotion_from_video(video_path):
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray_frame, scaleFactor=1.3, minNeighbors=5)
 
-        frame_result = []  # To hold emotions for this frame
+        frame_result = [] 
 
         for (x, y, w, h) in faces:
             face_roi = gray_frame[y:y + h, x:x + w]
@@ -144,7 +129,6 @@ def upload_image():
     temp_file_path = os.path.join('uploads', filename)
     file.save(temp_file_path)
 
-    # Detect emotions
     image = cv2.imread(temp_file_path)
     if image is None:
         os.remove(temp_file_path)

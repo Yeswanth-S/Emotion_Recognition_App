@@ -1,19 +1,8 @@
 <!-- sidebar.html -->
 <div id="sidebar" class="sidebar">
-    <button class="toggle-btn" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </button>
-    <a href="/"><i class="fas fa-home"></i> <span class="link-text">Home</span></a>
-    <a href="/upload_image"><i class="fas fa-upload"></i> <span class="link-text">Upload Image</span></a>
-    <a href="/upload_video"><i class="fas fa-video"></i> <span class="link-text">Upload Video</span></a>
-    <a href="/use_webcam"><i class="fas fa-camera"></i> <span class="link-text">Use Webcam</span></a>
-    <a href="/livefeed"><i class="fas fa-broadcast-tower"></i> <span class="link-text">Livefeed</span></a>
+    <a href="/" class="{{ 'active' if request.path == '/' else '' }}"><i class="fas fa-house"></i> <span class="link-text">Home</span></a>
+    <a href="/upload_image" class="{{ 'active' if request.path == '/upload_image' else '' }}"><i class="fas fa-arrow-up-from-bracket"></i> <span class="link-text">Upload Image</span></a>
+    <a href="/upload_video" class="{{ 'active' if request.path == '/upload_video' else '' }}"><i class="fas fa-video"></i> <span class="link-text">Upload Video</span></a>
+    <a href="/use_webcam" class="{{ 'active' if request.path == '/use_webcam' else '' }}"><i class="fas fa-camera"></i> <span class="link-text">Use Webcam</span></a>
+    <a href="/livefeed" class="{{ 'active' if request.path == '/livefeed' else '' }}"><i class="fas fa-satellite-dish"></i> <span class="link-text">Livefeed</span></a>
 </div>
-
-<script>
-    // Toggle sidebar visibility
-    function toggleSidebar() {
-        const sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("collapsed");
-    }
-</script>
