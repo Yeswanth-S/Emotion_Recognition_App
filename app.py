@@ -54,7 +54,7 @@ def detect_emotion_from_image(img):
 
         img_array = img_to_array(face_roi_resized)
         img_array = np.expand_dims(img_array, axis=0)
-        img_array /= 255.0
+        img_array = (img_array / 255.0 - 0.5) * 2.0  # match Main.py's [-1, 1] training scale
 
         predictions = model.predict(img_array)
         max_index = np.argmax(predictions[0])
@@ -92,7 +92,7 @@ def detect_emotion_from_video(video_path):
 
             img_array = img_to_array(face_roi_resized)
             img_array = np.expand_dims(img_array, axis=0)
-            img_array /= 255.0
+            img_array = (img_array / 255.0 - 0.5) * 2.0  # match Main.py's [-1, 1] training scale
 
             predictions = model.predict(img_array)
             max_index = np.argmax(predictions[0])
