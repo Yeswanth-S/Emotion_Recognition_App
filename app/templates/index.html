@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emotion Detection App - Features</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 <body>
     <div class="theme-switcher"> <label class="switch"> <input type="checkbox" id="theme-toggle"> <span class="slider"> </span> </label> </div>
     <div class="main-container">
+        <span class="eyebrow">FER · Real-time emotion detection</span>
         <h1>Explore Our Features</h1>
+        <p class="main-sub">Pick a mode to get started.</p>
         <div class="cards-container">
             <div class="card">
                 <div class="card-content">
-                    <i class="fas fa-image fa-3x"></i>
+                    <i class="fas fa-image"></i>
                     <h3>Upload Image</h3>
                     <p>Detect emotions from uploaded images in seconds.</p>
                 </div>
@@ -28,7 +31,7 @@
 
             <div class="card">
                 <div class="card-content">
-                    <i class="fas fa-video fa-3x"></i>
+                    <i class="fas fa-video"></i>
                     <h3>Upload Video</h3>
                     <p>Analyze emotions from video clips with ease.</p>
                 </div>
@@ -41,7 +44,7 @@
 
             <div class="card">
                 <div class="card-content">
-                    <i class="fas fa-camera fa-3x"></i>
+                    <i class="fas fa-camera"></i>
                     <h3>Use Webcam</h3>
                     <p>Capture frames in real-time from your webcam to detect emotions instantly.</p>
                 </div>
@@ -54,7 +57,7 @@
 
             <div class="card">
                 <div class="card-content">
-                    <i class="fas fa-broadcast-tower fa-3x"></i>
+                    <i class="fas fa-satellite-dish"></i>
                     <h3>Livefeed</h3>
                     <p>Stream live from your webcam and receive real-time emotion updates as you interact.</p>
                 </div>
