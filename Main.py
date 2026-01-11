@@ -2,7 +2,7 @@
 FER (Facial Emotion Recognition) - Training Script
 
 Trains a lightweight residual depthwise-separable CNN (mini-Xception family)
-on FER2013. Designed for TensorFlow 2.10, 48x48 grayscale input, and real-time inference.
+on FER2013. 48x48 grayscale input, built for real-time inference.
 
 Usage:
     python Main.py
@@ -13,6 +13,8 @@ Usage:
 """
 
 import os
+os.environ.setdefault("TF_USE_LEGACY_KERAS", "1")
+
 import json
 import random
 import argparse
