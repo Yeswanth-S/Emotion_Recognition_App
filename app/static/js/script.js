@@ -103,7 +103,7 @@ function uploadImage(file) {
     loading.style.display = 'block';
     result.innerHTML = '';
 
-    fetch('/upload', {
+    fetch('/upload_image', {
         method: 'POST',
         body: formData
     })
@@ -224,7 +224,7 @@ function uploadSnapshot(formData) {
     loading.style.display = 'block';
     result.innerHTML = '';
 
-    fetch('/upload', {
+    fetch('/upload_image', {
         method: 'POST',
         body: formData
     })
