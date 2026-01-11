@@ -16,7 +16,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10+-9d7bff?style=for-the-badge&logo=python&logoColor=white&labelColor=000000" alt="Python 3.10+"/>
   <img src="https://img.shields.io/badge/flask-3.0-9d7bff?style=for-the-badge&logo=flask&logoColor=white&labelColor=000000" alt="Flask"/>
-  <img src="https://img.shields.io/badge/tensorflow-2.10-9d7bff?style=for-the-badge&logo=tensorflow&logoColor=white&labelColor=000000" alt="TensorFlow"/>
+  <img src="https://img.shields.io/badge/tensorflow-2.20-9d7bff?style=for-the-badge&logo=tensorflow&logoColor=white&labelColor=000000" alt="TensorFlow"/>
   <img src="https://img.shields.io/badge/opencv-4.x-9d7bff?style=for-the-badge&logo=opencv&logoColor=white&labelColor=000000" alt="OpenCV"/>
 </p>
 
@@ -182,7 +182,7 @@ Emotion-Detection-App/
 
 * **Backend:** Python, Flask
 * **Computer Vision:** OpenCV, Haar Cascades
-* **Deep Learning:** TensorFlow 2.10, Keras, NumPy, scikit-learn
+* **Deep Learning:** TensorFlow 2.20, Keras, NumPy, scikit-learn
 * **Frontend:** HTML, CSS, JavaScript
 
 ## 📄 License

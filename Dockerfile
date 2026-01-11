@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -29,6 +29,10 @@ EXPOSE 5000
 # Define environment variable to ensure Flask runs in production mode
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
+
+# Keep TensorFlow saving/loading weights in the legacy Keras 2 format that
+# app.py's model_from_json() + load_weights() expects
+ENV TF_USE_LEGACY_KERAS=1
 
 # Run the application
 CMD ["python", "app.py"]

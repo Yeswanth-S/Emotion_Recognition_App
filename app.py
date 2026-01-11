@@ -1,4 +1,5 @@
 import os
+os.environ.setdefault("TF_USE_LEGACY_KERAS", "1")
 import base64
 import cv2
 import numpy as np
