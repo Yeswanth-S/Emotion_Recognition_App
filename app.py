@@ -11,6 +11,7 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 templates_folder = os.path.join(script_dir, 'app', 'templates')
 static_folder = os.path.join(script_dir, 'app', 'static')
 models_folder = os.path.join(script_dir, 'models')
+uploads_folder = os.path.join(script_dir, 'uploads')
 
 app = Flask(__name__, template_folder=templates_folder, static_folder=static_folder)
 
@@ -115,7 +116,7 @@ def livefeed_page():
 def page_not_found(e):
     return render_template('404.html'), 404
 
-@app.route('/upload', methods=['POST'])
+@app.route('/upload_image', methods=['POST'])
 def upload_image():
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
@@ -126,7 +127,7 @@ def upload_image():
     if not allowed_file(filename):
         return jsonify({'error': 'Unsupported file type'}), 400
 
-    temp_file_path = os.path.join('uploads', filename)
+    temp_file_path = os.path.join(uploads_folder, filename)
     file.save(temp_file_path)
 
     image = cv2.imread(temp_file_path)
@@ -150,7 +151,7 @@ def upload_video():
     if not allowed_file(filename):
         return jsonify({'error': 'Unsupported file type'}), 400
 
-    temp_file_path = os.path.join('uploads', filename)
+    temp_file_path = os.path.join(uploads_folder, filename)
     file.save(temp_file_path)
 
     frame_emotions = detect_emotion_from_video(temp_file_path)
